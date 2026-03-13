@@ -8,7 +8,7 @@
 		"build": "svelte-package && npm run prepack",
 		"prepack": "svelte-kit sync && publint"
 	},
-	"version": "0.0.0-pre.1",
+	"version": "0.0.2",
 	"description": "Simple reactive search parameters for svelte",
 	"author": {
 		"name": "propolies",
@@ -16,7 +16,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/propolies/svelte-search-parameters.git",
+		"url": "git+https://github.com/propolies/svelte-search-params.git",
 		"directory": "package"
 	},
 	"types": "./dist/index.d.ts",
