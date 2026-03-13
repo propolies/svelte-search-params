@@ -1,12 +1,47 @@
 {
-  "scripts": {
-    "clean": "rimraf --glob \"**/node_modules\""
-  },
-  "type": "module",
-  "private": true,
-  "devDependencies": {
-    "nodemon": "^3.1.14",
-    "rimraf": "^6.1.3",
-    "tsx": "^4.21.0"
-  }
+	"name": "svelte-search-params",
+	"scripts": {
+		"test": "vitest",
+		"lint": "publint",
+		"sync": "svelte-kit sync",
+		"dev": "nodemon --exec tsx index.ts",
+		"build": "svelte-package && npm run prepack",
+		"prepack": "svelte-kit sync && publint"
+	},
+	"version": "0.0.0-pre.1",
+	"description": "Simple reactive search parameters for svelte",
+	"author": {
+		"name": "propolies",
+		"url": "https://github.com/propolies"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/propolies/svelte-search-parameters.git",
+		"directory": "package"
+	},
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"main": "dist/index.js",
+	"files": [
+		"dist",
+		"!dist/**/*.test.*"
+	],
+	"peerDependencies": {
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@sveltejs/package": "^2.5.7",
+		"publint": "^0.3.18",
+		"typescript": "^5.9.3",
+		"valibot": "^1.2.0",
+		"vite": "^7.3.1",
+		"vitest": "^4.1.0"
+	},
+	"type": "module"
 }
