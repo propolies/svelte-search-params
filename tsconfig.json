@@ -12,6 +12,7 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
+		"declarationMap": true,
 		"strict": true,
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext"

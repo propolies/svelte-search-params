@@ -8,7 +8,7 @@
 		"build": "svelte-package && npm run prepack",
 		"prepack": "svelte-kit sync && publint"
 	},
-	"version": "0.0.2",
+	"version": "0.0.5",
 	"description": "Simple reactive search parameters for svelte",
 	"author": {
 		"name": "propolies",
@@ -28,6 +28,8 @@
 	},
 	"main": "dist/index.js",
 	"files": [
+		"src",
+		"!src/**/*.test.*",
 		"dist",
 		"!dist/**/*.test.*"
 	],
