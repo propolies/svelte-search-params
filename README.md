@@ -18,7 +18,7 @@ Tiny dependency free reactive search parameters for svelte 5.
   const params = searchParams(schema)
 
   // To change the url search parameters simply reassign
-  params.page = 2
+  params.page = 2 // this won't push history
 </script>
 ```
 
