@@ -6,10 +6,8 @@ export function searchParams<
 	T extends v.ObjectEntries,
 	S extends v.ObjectSchema<T, undefined>
 >(schema: S) {
-	const keys = Object.entries(schema.entries).map(([key]) => key)
-
 	const params = Object.fromEntries(
-		keys.map((key) => {
+		Object.keys(schema.entries).map((key) => {
 			const value = page.url.searchParams.get(key)
 
 			if (value === null) return [key, null]
