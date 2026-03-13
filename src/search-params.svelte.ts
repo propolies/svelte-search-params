@@ -14,7 +14,7 @@ export function searchParams<
 
 			try {
 				return [key, JSON.parse(value)]
-			} catch (e) {
+			} catch {
 				return [key, null]
 			}
 		})

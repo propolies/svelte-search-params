@@ -4,11 +4,10 @@
 		"test": "vitest",
 		"lint": "publint",
 		"sync": "svelte-kit sync",
-		"dev": "nodemon --exec tsx index.ts",
 		"build": "svelte-package && npm run prepack",
 		"prepack": "svelte-kit sync && publint"
 	},
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Simple reactive search parameters for svelte",
 	"author": {
 		"name": "propolies",
