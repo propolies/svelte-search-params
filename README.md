@@ -1,4 +1,4 @@
-# svelte-search-parameters - [npm](https://www.npmjs.com/package/svelte-search-parameters)
+# svelte-search-params - [npm](https://www.npmjs.com/package/svelte-search-params)
 
 Tiny dependency free reactive search parameters for svelte 5.
 
