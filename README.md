@@ -2,7 +2,11 @@
 
 Tiny dependency free reactive search parameters for svelte 5.
 
-## Example
+## Errors not supported
+
+Prevent validation errors by using `fallbacks` or `optionals`.
+
+## Example using valibot
 
 ```svelte
 <script lang="ts">
@@ -12,16 +16,15 @@ Tiny dependency free reactive search parameters for svelte 5.
   const schema = v.object({
     order: v.fallback(v.string(), "alphabetic"),
     page: v.fallback(v.number(), 1),
-    optionalRegionFilter: v.nullable(v.string())
+    optionalMaxParameter: v.optional(v.number())
   })
 
   const params = searchParams(schema)
-
-  // To change the url search parameters simply reassign
-  params.page = 2 // this won't push history
 </script>
+
+<button onclick={() => params.page += 1}>next page</button>
 ```
 
 ## Support
 
-Currently only supports [valibot](https://valibot.dev/) as validation library.
+Supports all validators who implement StandardSchemaV1.

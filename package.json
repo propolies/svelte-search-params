@@ -7,7 +7,7 @@
 		"build": "svelte-package && npm run prepack",
 		"prepack": "svelte-kit sync && publint"
 	},
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "Simple reactive search parameters for svelte",
 	"author": {
 		"name": "propolies",
@@ -37,6 +37,7 @@
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
+		"@standard-schema/spec": "^1.1.0",
 		"@sveltejs/package": "^2.5.7",
 		"publint": "^0.3.18",
 		"typescript": "^5.9.3",

@@ -1,26 +1,22 @@
 import { replaceState } from "$app/navigation"
 import { page } from "$app/state"
-import * as v from "valibot"
+import type { StandardSchemaV1 } from "@standard-schema/spec"
 
-export function searchParams<
-	T extends v.ObjectEntries,
-	S extends v.ObjectSchema<T, undefined>
->(schema: S) {
+export function searchParams<T extends object>(schema: StandardSchemaV1<T>) {
 	const params = Object.fromEntries(
-		Object.keys(schema.entries).map((key) => {
-			const value = page.url.searchParams.get(key)
-
-			if (value === null) return [key, null]
-
+		page.url.searchParams.entries().map(([key, value]) => {
 			try {
 				return [key, JSON.parse(value)]
 			} catch {
-				return [key, null]
+				return [key, undefined]
 			}
 		})
 	)
-	const parsedParams = v.parse(schema, params)
-	const state = $state(parsedParams)
+
+	const validatedParams = schema["~standard"].validate(
+		params
+	) as StandardSchemaV1.SuccessResult<T>
+	const state = $state(validatedParams.value)
 
 	return new Proxy(state, {
 		set: (_, property, value) => {

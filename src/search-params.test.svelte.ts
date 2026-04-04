@@ -21,60 +21,47 @@ beforeEach(() => {
 })
 
 describe("searchParams - initialization", () => {
-	it("reads a string parameter from the URL", () => {
-		setParam("name", "alice")
+	it("marshalls correctly from the URL", () => {
+		setParam("str", "someString")
+		setParam("num", 1)
+		setParam("arr", [2, "b"])
 
 		const schema = v.object({
-			name: v.string()
+			str: v.string(),
+			num: v.number(),
+			arr: v.array(v.union([v.number(), v.string()]))
 		})
 
 		const params = searchParams(schema)
 
-		expect(params.name).toBe("alice")
+		expect(params.str).toBe("someString")
+		expect(params.num).toBe(1)
+		expect(params.arr).toStrictEqual([2, "b"])
 	})
 
-	it("reads a number parameter from the URL", () => {
-		setParam("age", 42)
-
+	it("accepts undefined values", () => {
 		const schema = v.object({
-			age: v.number()
+			opt: v.optional(v.string(), "default")
 		})
-
 		const params = searchParams(schema)
 
-		expect(params.age).toBe(42)
+		expect(params.opt).toEqual("default")
 	})
 
-	it("reads an array of strings from the URL", () => {
-		setParam("tags", ["foo", "bar", "baz"])
-
+	it("falls back to fallback value", () => {
 		const schema = v.object({
-			tags: v.array(v.string())
-		})
-
-		const params = searchParams(schema)
-
-		expect(params.tags).toEqual(["foo", "bar", "baz"])
-	})
-
-	it("reads an array of numbers from the URL", () => {
-		setParam("nums", [1, 2, 3])
-
-		const schema = v.object({
-			nums: v.array(v.number())
+			a: v.fallback(v.number(), 3)
 		})
 		const params = searchParams(schema)
 
-		console.log(params)
-
-		expect(params.nums).toEqual([1, 2, 3])
+		expect(params.a).toEqual(3)
 	})
 })
 
 describe("searchParams - set", () => {
 	it("sets a value in the url", () => {
 		const schema = v.object({
-			value: v.nullable(v.number())
+			value: v.optional(v.number())
 		})
 		const params = searchParams(schema)
 		params.value = 3
