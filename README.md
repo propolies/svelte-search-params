@@ -6,6 +6,10 @@ Tiny dependency free reactive search parameters for svelte 5.
 
 Prevent validation errors by using `fallbacks` or `optionals`.
 
+## Options
+
+- overwrite: overwrite given values
+
 ## Example using valibot
 
 ```svelte

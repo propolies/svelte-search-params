@@ -69,3 +69,17 @@ describe("searchParams - set", () => {
 		expect(page.url.searchParams.get("value")).toBe("3")
 	})
 })
+
+describe("searchParams - options", () => {
+	it("overwrite works", () => {
+		const schema = v.object({
+			value: v.number()
+		})
+		const params = searchParams(schema, {
+			overwrite: {
+				value: 4
+			}
+		})
+		expect(params.value).toBe(4)
+	})
+})

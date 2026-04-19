@@ -2,7 +2,14 @@ import { replaceState } from "$app/navigation"
 import { page } from "$app/state"
 import type { StandardSchemaV1 } from "@standard-schema/spec"
 
-export function searchParams<T extends object>(schema: StandardSchemaV1<T>) {
+interface Options<T extends object> {
+	overwrite?: T
+}
+
+export function searchParams<T extends object>(
+	schema: StandardSchemaV1<T>,
+	options?: Options<T>
+) {
 	const params = Object.fromEntries(
 		page.url.searchParams.entries().map(([key, value]) => {
 			try {
@@ -13,11 +20,12 @@ export function searchParams<T extends object>(schema: StandardSchemaV1<T>) {
 		})
 	)
 
-	const validatedParams = schema["~standard"].validate(
-		params
-	) as StandardSchemaV1.SuccessResult<T>
-	const state = $state(validatedParams.value)
+	const validatedParams = schema["~standard"].validate({
+		...params,
+		...options?.overwrite
+	}) as StandardSchemaV1.SuccessResult<T>
 
+	const state = $state(validatedParams.value)
 	return new Proxy(state, {
 		set: (_, property, value) => {
 			if (value === null) {
